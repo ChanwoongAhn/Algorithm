@@ -1,0 +1,10 @@
+* sc.next(), sc.nextInt(), sc.nextLine() 차이
+
+next(), nextInt()는 공백 단위로 값, 문자열을 읽는다.
+nextLine()은 Enter 단위로 문자열을 읽는다(\r\n 으로 구성된 두 개의 문자)
+int a = sc.nextInt();
+String s = sc.nextLine();
+위의 코드에서 2란 값을 a에 입력하고 Enter을 입력시, nextLine()에서 
+입력을 기다리지 않고 바로 통과된다. Enter 값은 입력 스트림 버퍼에 남아있기 때문
+따라서 올바르게 동작시키려면, 위의 코드 두 줄 사이에 sc.nextLine()을 삽입하여
+버퍼에 남아있는 것을 무시하게 하고 입력을 받아야 한다.
