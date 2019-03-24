@@ -1,181 +1,169 @@
 import java.util.*;
+import java.util.Queue;
+import java.awt.Point;
+import java.util.ArrayList;
 
-public class Baekjoon_15683{
-	static Scanner sc = new Scanner(System.in);
-	static int n, m, ans = Integer.MAX_VALUE;
-	static int[][] map;
-	static ArrayList<Node> list = new ArrayList<Node>();
-	 
-	public static void main(String [] args) {
-	    n = sc.nextInt();
-	    m = sc.nextInt();
-	    map = new int[n][m];
-	 
-	    for (int i = 0; i < n; i++) {
-	        for (int j = 0; j < m; j++) {
-	            int v = sc.nextInt();
-	            map[i][j] = v;
-	            if (1 <= v && v <= 5) {
-	                list.add(new Node(i, j, v));
-	            }
-	        }
-	    }
-	    search(0, map);
-	    System.out.println(ans);
-	    for(int i = 0; i < n; i ++) {
-        	for(int j = 0; j < m; j ++)
-        		System.out.print(map[i][j] + " ");
-        	System.out.println();
-        }
+public class Test2018_01 {
+	public static Scanner sc = new Scanner(System.in);
+	public static Queue <Point> queue = new LinkedList<Point>();
+	public static int [][] map;
+	public static int n, m;
+	public static int queue_size;
+	public static int max_num = 99999;
+	public static ArrayList<Node> list = new ArrayList<Node>();
+	
+	public static void detect(int [][] visited, int x, int y, int direction) {
+		switch(direction) {
+			case 0 :
+				for(int i = y; i >= 0; i --) {
+					if(visited[x][i] == 6)
+						break;
+					else {
+						visited[x][i] = 7;
+					}
+				}
+				break;
+			case 1 :
+				for(int i = x; i >= 0; i --) {
+					if(visited[i][y] == 6)
+						break;
+					else {
+						visited[i][y] = 7;
+					}
+				}
+				break;
+			case 2 :
+				for(int i = y; i < m; i ++) {
+					if(visited[x][i] == 6)
+						break;
+					else {
+						visited[x][i] = 7;
+					}
+				}
+				break;
+			case 3 :
+				for(int i = x; i < n; i ++) {
+					if(visited[i][y] == 6)
+						break;
+					else {
+						visited[i][y] = 7;
+					}
+				}
+				break;
+		}
 	}
-	 
-	public static void search(int cctvIndex, int[][] prev) {
-	    int[][] visited = new int[n][m];
-	    if (cctvIndex == list.size()) {
-	        int temp = 0;
-	        for (int i = 0; i < n; i++) {
-	            for (int j = 0; j < m; j++) {
-	                if (prev[i][j] == 0) {
-	                    temp++;
-	                }
-	            }
-	        }
-	        System.out.println("Temp : " + temp);
-	        if (temp < ans) {
-	            ans = temp;
-	        }
-	        for(int i = 0; i < n; i ++) {
-	        	for(int j = 0; j < m; j ++)
-	        		System.out.print(map[i][j] + " ");
-	        	System.out.println();
-	        }
-	        System.out.println();
-	        
-	    } else {
-	        Node node = list.get(cctvIndex);
-	        int idx = node.idx;
-	        int x = node.x;
-	        int y = node.y;
-	 
-	        switch (idx) {
-	            case 1:
-	                for (int k = 0; k < 4; k++) {
-	                    for (int i = 0; i < n; i++) {
-	                        visited[i] = Arrays.copyOf(prev[i], m);
-	                    }
-	                    detect(visited, y, x, k);
-	                    search(cctvIndex + 1, visited);
-	                }
-	                for(int i = 0; i < n; i ++) {
-        	        	for(int j = 0; j < m; j ++)
-        	        		System.out.print(visited[i][j] + " ");
-        	        	System.out.println();
-        	        }
-                    System.out.println();
-	                break;
-	            case 2:
-	                for (int k = 0; k < 2; k++) {
-	                    for (int i = 0; i < n; i++) {
-	                        visited[i] = Arrays.copyOf(prev[i], m);
-	                    }
-	                    detect(visited, y, x, k);
-	                    detect(visited, y, x, k + 2);
-	                    search(cctvIndex + 1, visited);
-	                }
-	                for(int i = 0; i < n; i ++) {
-        	        	for(int j = 0; j < m; j ++)
-        	        		System.out.print(visited[i][j] + " ");
-        	        	System.out.println();
-        	        }
-                    System.out.println();
-	                break;
-	            case 3:
-	                for (int k = 0; k < 4; k++) {
-	                    for (int i = 0; i < n; i++) {
-	                        visited[i] = Arrays.copyOf(prev[i], m);
-	                    }
-	                    detect(visited, y, x, k);
-	                    detect(visited, y, x, (k + 1) % 4);
-	                    search(cctvIndex + 1, visited);
-	                }
-	                break;
-	            case 4:
-	                for (int k = 0; k < 4; k++) {
-	                    for (int i = 0; i < n; i++) {
-	                        visited[i] = Arrays.copyOf(prev[i], m);
-	                    }
-	                    detect(visited, y, x, k);
-	                    detect(visited, y, x, (k + 1) % 4);
-	                    detect(visited, y, x, (k + 2) % 4);
-	                    search(cctvIndex + 1, visited);
-	                }
-	                break;
-	            case 5:
-	                for (int i = 0; i < n; i++) {
-	                    visited[i] = Arrays.copyOf(prev[i], m);
-	                }
-	                detect(visited, y, x, 0);
-	                detect(visited, y, x, 1);
-	                detect(visited, y, x, 2);
-	                detect(visited, y, x, 3);
-	                search(cctvIndex + 1, visited);
-	                for(int i = 0; i < n; i ++) {
-        	        	for(int j = 0; j < m; j ++)
-        	        		System.out.print(visited[i][j] + " ");
-        	        	System.out.println();
-        	        }
-                    System.out.println();
-	                break;
-	        }
-	    }
+	public static void search(int cctvnum, int [][] prev) {
+		int [][] visited = new int[n][m];
+		
+		if(cctvnum == queue_size) {
+			int tmp = 0;
+			for(int i = 0; i < n; i ++)
+				for(int j = 0; j < m; j ++) {
+					if(prev[i][j] == 0)
+						tmp ++;
+				}
+			if(tmp < max_num)
+				max_num = tmp;
+		}
+		else {
+			
+			int x = queue.peek().x;
+			int y = queue.poll().y;
+			int num = map[x][y];
+			/*
+			Node node = list.get(cctvnum);
+			int idx = node.index;
+			int x = node.x;
+			int y = node.y;
+			*/
+			switch(num) {
+				case 1 :
+					for(int i = 0; i < 4; i ++) {
+						for(int k = 0; k < n; k ++) {
+							visited[k] = Arrays.copyOf(prev[k], m);
+						}
+						
+						detect(visited, x, y, i);
+						search(cctvnum + 1, visited);
+					}
+					break;
+				case 2 :
+					for(int i = 0; i < 2; i ++) {
+						for(int k = 0; k < n; k ++) {
+							visited[k] = Arrays.copyOf(prev[k], m);
+						}
+						
+						detect(visited, x, y, i);
+						detect(visited, x, y, (i + 2)%4);
+						search(cctvnum + 1, visited);
+					}
+					break;
+				case 3 :
+					for(int i = 0; i < 4; i ++) {
+						for(int k = 0; k < n; k ++) {
+							visited[k] = Arrays.copyOf(prev[k], m);
+						}
+						
+						detect(visited, x, y, i);
+						detect(visited, x, y, (i+1)%4);
+						search(cctvnum + 1, visited);
+					}
+					break;
+				case 4 :
+					for(int i = 0; i < 4; i ++) {
+						for(int k = 0; k < n; k ++)
+							visited[k] = Arrays.copyOf(prev[k], m);
+						
+						detect(visited, x, y, i);
+						detect(visited, x, y, (i+1)%4);
+						detect(visited, x, y, (i+2)%4);
+						search(cctvnum + 1, visited);
+					}
+					break;
+				case 5 :
+					for(int k = 0; k < n; k ++) {
+						visited[k] = Arrays.copyOf(prev[k], m);
+					}
+					
+					detect(visited, x, y, 0);
+					detect(visited, x, y, 1);
+					detect(visited, x, y, 2);
+					detect(visited, x, y, 3);
+					search(cctvnum + 1, visited);
+					
+					break;
+				}
+		}
+}
+	public static void main(String[] args) {
+		n = sc.nextInt();
+		m = sc.nextInt();
+		map = new int[n][m];
+		
+		for(int i = 0; i < n; i ++)
+			for(int j = 0; j < m; j ++) {
+				map[i][j] = sc.nextInt();
+				if(map[i][j] >= 1 && map[i][j] <= 5)
+					queue.add(new Point(i,j));
+					//list.add(new Node(i, j, map[i][j]));
+					
+					
+			}
+		queue_size = queue.size();
+		
+		search(0, map);
+		System.out.println(max_num);
 	}
-	 
-	public static void detect(int[][] visited, int i, int j, int direction) {
-	    switch (direction) {
-	        case 0:
-	            for (int k = j; k >= 0; k--) {
-	                if (map[i][k] == 6) {
-	                    break;
-	                }
-	                visited[i][k] = 7;
-	            }
-	            break;
-	        case 1:
-	            for (int k = i; k >= 0; k--) {
-	                if (map[k][j] == 6) {
-	                    break;
-	                }
-	                visited[k][j] = 7;
-	            }
-	            break;
-	        case 2:
-	            for (int k = j; k < m; k++) {
-	                if (map[i][k] == 6) {
-	                    break;
-	                }
-	                visited[i][k] = 7;
-	            }
-	            break;
-	        case 3:
-	            for (int k = i; k < n; k++) {
-	                if (map[k][j] == 6) {
-	                    break;
-	                }
-	                visited[k][j] = 7;
-	            }
-	            break;
-	    }
-	}
-	 
-	public static class Node {
-	    int x;
-	    int y;
-	    int idx;
-	 
-	    Node(int y, int x, int idx) {
-	        this.x = x;
-	        this.y = y;
-	        this.idx = idx;
-	    }
+	public static class Node{
+		int x;
+		int y;
+		int index;
+		
+		Node(int x, int y, int index){
+			this.x = x;
+			this.y = y;
+			this.index = index;
+		}
 	}
 }
+
