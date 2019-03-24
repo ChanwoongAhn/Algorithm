@@ -3,7 +3,7 @@ import java.util.Queue;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Test2018_01 {
+public class Baekjoon_15683 {
 	public static Scanner sc = new Scanner(System.in);
 	public static Queue <Point> queue = new LinkedList<Point>();
 	public static int [][] map;

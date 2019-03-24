@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Prob_5650 {
+public class Swea_5650 {
 	public static Scanner sc = new Scanner(System.in);
 	public static int [][] arr;
 	

@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class Prob_3190 {
+public class Baekjoon_3190 {
    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
    public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
    public static StringTokenizer st;

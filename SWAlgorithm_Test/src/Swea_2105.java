@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Prob_2105 {
+public class Swea_2105 {
 	public static Scanner sc = new Scanner(System.in);
 	public static Queue <Integer> que = new LinkedList<Integer>();
 	public static int [][] arr;

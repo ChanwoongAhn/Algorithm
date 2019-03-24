@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Prob_5658 {
+public class Swea_5658 {
 	public static Scanner sc = new Scanner(System.in);
 	
 	public static long hexatodeci(String s) {

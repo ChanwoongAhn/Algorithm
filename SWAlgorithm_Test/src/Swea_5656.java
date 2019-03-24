@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.Queue;
 import java.awt.Point;
 
-public class Prob_5656 {
+public class Swea_5656 {
 	public static Scanner sc = new Scanner(System.in);
 	public static int n;
 	public static int h;

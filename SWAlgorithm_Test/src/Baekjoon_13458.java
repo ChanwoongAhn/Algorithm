@@ -20,16 +20,18 @@ public class Baekjoon_13458 {
 		int b = Integer.parseInt(st.nextToken());
 		int c = Integer.parseInt(st.nextToken());
 		
-		int result = 0;
+		long result = 0;
 		
 		for(int i = 0; i < n; i ++) {
 			result += 1;
 			arr[i] -= b;
 			
-			if(arr[i] % c != 0)
-				result += (arr[i] / c + 1);
-			else
-				result += arr[i] / c;
+			if(arr[i] >= 0) {
+				if(arr[i] % c != 0)
+					result += (arr[i] / c + 1);
+				else
+					result += arr[i] / c;
+			}
 		}
 		bw.write(result + "");
 		bw.flush();

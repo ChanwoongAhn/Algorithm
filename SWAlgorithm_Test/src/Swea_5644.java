@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.Queue;
 
-public class Prob_5644 {
+public class Swea_5644 {
 	public static Scanner sc = new Scanner(System.in);
 	public static Queue <Integer> a = new LinkedList<Integer>();
 	public static Queue <Integer> b = new LinkedList<Integer>();
