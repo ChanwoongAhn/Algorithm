@@ -70,10 +70,11 @@ public class Baekjoon_14499 {
 				break;
 		}
 		
-		if(map[x][y] == 0) {
+		//이동한 후 map과 주사위 아랫면 처리
+		if(map[x][y] == 0 && result) {
 			map[x][y] = dice[3][1];
 		}
-		else {
+		else if(map[x][y] != 0 && result){
 			dice[3][1] = map[x][y];
 			map[x][y] = 0;
 		}
