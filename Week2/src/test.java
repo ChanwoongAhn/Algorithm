@@ -2,11 +2,18 @@ import java.util.*;
 import java.util.Stack;
 
 public class test {
+	
+	public static void test(int n) {
+		n = -n;
+		System.out.println(n);
 		
+		n = -n;
+		System.out.println(n);
+	}
 	public static void main(String[] args) {
-		String tmp = "abcdef";
+		int d = -1;
 		
-		System.out.println(tmp.substring(0, 3) + tmp.substring(3));
+		test(d);
 	}
 }
 	/*
