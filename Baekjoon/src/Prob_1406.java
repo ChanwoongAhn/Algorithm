@@ -32,10 +32,6 @@ public class Prob_1406 {
 		}
 		
 		for(int i = 0; i < n; i ++) {
-			bw.write(order[i] + " : " + alpha[i] + "\n");
-		}
-		
-		for(int i = 0; i < n; i ++) {
 			switch(order[i].charAt(0)) {
 				case 'L' :
 					if(cursor != 0)

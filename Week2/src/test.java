@@ -11,9 +11,8 @@ public class test {
 		System.out.println(n);
 	}
 	public static void main(String[] args) {
-		int d = -1;
+		int n = 3;
 		
-		test(d);
 	}
 }
 	/*
