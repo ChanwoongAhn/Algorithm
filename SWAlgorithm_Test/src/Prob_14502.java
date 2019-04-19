@@ -30,5 +30,4 @@ public class Prob_14502 {
 		bw.flush();
 		bw.close();
 	}
-
 }

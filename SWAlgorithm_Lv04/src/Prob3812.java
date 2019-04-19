@@ -1,42 +1,46 @@
 import java.util.*;
+import java.io.*;
+import java.math.BigInteger;
 
 public class Prob3812 {
-	public static Scanner sc = new Scanner(System.in);
-	public static int num = 1;
-	public static void coloring() {
-		int x = sc.nextInt();
-		int y = sc.nextInt();
-		int z = sc.nextInt();
-		int a = sc.nextInt();
-		int b = sc.nextInt();
-		int c = sc.nextInt();
-		int n = sc.nextInt();
+	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static StringTokenizer st;
+	
+	public static void main(String[] args) throws IOException{
+		int T = Integer.parseInt(br.readLine());
 		
-		int [] arr = new int[n];
-		int tmp = 0;
-		
-		for(int i = 0; i < x; i++) 
-			for(int j = 0; j < y; j++) 
-				for(int k = 0; k < z; k++) {
-					tmp = (Math.abs(i-a)+Math.abs(j-b)+Math.abs(k-c)) % n;
-					arr[tmp] ++;
-				}
-		System.out.print("#" + num + " ");
-		num ++;
-		
-		for(int i = 0; i < n; i ++) {
-			if(i == n-1)
-				System.out.println(arr[i]);
-			else
-				System.out.print(arr[i] + " ");
-		}
-	}
-	public static void main(String[] args) {
-		int testcase = sc.nextInt();
+		for(int i = 0; i < T; i ++) {
+			st = new StringTokenizer(br.readLine());
+			int X = Integer.parseInt(st.nextToken());
+			int Y = Integer.parseInt(st.nextToken());
+			int Z = Integer.parseInt(st.nextToken());
 			
-		while(testcase -- > 0) {
-			coloring();
+			int A = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken());
+			int C = Integer.parseInt(st.nextToken());
+
+			int N = Integer.parseInt(st.nextToken());
+			
+			BigInteger [] big = new BigInteger[N];
+			
+			for(int j = 0; j < N; j ++)
+				big[j] = BigInteger.ZERO;
+			for(int x = 0; x < X; x ++) {
+				for(int y = 0; y < Y; y ++) {
+					for(int z = 0; z < Z; z ++) {
+						int tmp = (Math.abs(x-A) + Math.abs(y-B) + Math.abs(z-C)) % N;
+						big[tmp] = big[tmp].add(BigInteger.ONE);
+					}
+				}
+			}
+			
+			for(int j = 0; j < N; j ++)
+				bw.write(big[j] + " ");
+			bw.write("\n");
 		}
+		bw.flush();
+		bw.close();
 	}
 
 }
